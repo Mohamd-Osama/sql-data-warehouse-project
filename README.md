@@ -81,5 +81,5 @@ sql-data-warehouse-project/
 **Mohamed Osama**  
 *Data Analyst & BI Developer*
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mohamed%20Osama-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-osama10/)
-[![Portfolio](https://img.shields.io/badge/Vercel-Data%20Analyst%20%26%20BI%20Developer-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mo-osama.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mohamed_Osama-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-osama10/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Data_Analyst_&_BI_Developer-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://mo-osama.vercel.app/)
