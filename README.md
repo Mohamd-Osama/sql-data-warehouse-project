@@ -1,122 +1,85 @@
+# SQL Data Warehouse & Business Intelligence Project
 
-# Data Warehouse and Analytics Project
-
-Welcome to the **Data Warehouse and Analytics Project** repository! 🚀  
-This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project, it highlights industry best practices in data engineering and analytics.
+A comprehensive end-to-end Data Warehousing and Analytics solution built using **Microsoft SQL Server**. This project demonstrates the implementation of a modern **Medallion Architecture** (Bronze, Silver, Gold), robust ETL/ELT pipelines, data cleansing frameworks, star schema dimensional modeling, and business analytics.
 
 ---
-## 🏗️ Data Architecture
 
-The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
+## Data Architecture
+
+The architecture follows the industry-standard **Medallion Architecture** pattern to structure and process data progressively:
+
 ![Data Architecture](docs/data_architecture.png)
 
-1. **Bronze Layer**: Stores raw data as-is from the source systems. Data is ingested from CSV Files into SQL Server Database.
-2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare data for analysis.
-3. **Gold Layer**: Houses business-ready data modeled into a star schema required for reporting and analytics.
-
----
-## 📖 Project Overview
-
-This project involves:
-
-1. **Data Architecture**: Designing a Modern Data Warehouse Using Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
-2. **ETL Pipelines**: Extracting, transforming, and loading data from source systems into the warehouse.
-3. **Data Modeling**: Developing fact and dimension tables optimized for analytical queries.
-4. **Analytics & Reporting**: Creating SQL-based reports and dashboards for actionable insights.
-
-🎯 This repository is an excellent resource for professionals and students looking to showcase expertise in:
-- SQL Development
-- Data Architect
-- Data Engineering  
-- ETL Pipeline Developer  
-- Data Modeling  
-- Data Analytics  
+1. **Bronze Layer**: Stores raw ingested data as-is from disparate source systems (ERP and CRM CSV files) with no modifications.
+2. **Silver Layer**: Performs data cleansing, standardization, null handling, structural normalization, and adds audit metadata (`dwh_create_date`) to ensure data integrity and traceability.
+3. **Gold Layer**: Hosts business-ready data modeled into an optimized **Star Schema** (Fact and Dimension views/tables) designed specifically for high-performance analytical reporting and BI dashboards.
 
 ---
 
-## 🛠️ Important Links & Tools:
+## Technical Highlights & Capabilities
 
-Everything is for Free!
-- **[Datasets](datasets/):** Access to the project dataset (csv files).
-- **[SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads):** Lightweight server for hosting your SQL database.
-- **[SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16):** GUI for managing and interacting with databases.
-- **[Git Repository](https://github.com/):** Set up a GitHub account and repository to manage, version, and collaborate on your code efficiently.
-- **[DrawIO](https://www.drawio.com/):** Design data architecture, models, flows, and diagrams.
-- **[Notion](https://www.notion.com/):** All-in-one tool for project management and organization.
-- **[Notion Project Steps](https://thankful-pangolin-2ca.notion.site/SQL-Data-Warehouse-Project-16ed041640ef80489667cfe2f380b269?pvs=4):** Access to All Project Phases and Tasks.
+- **Architecture Design**: Implementing multi-tier Medallion Architecture using SQL Server Schemas (`bronze`, `silver`, `gold`).
+- **ETL/ELT Pipelines**: Extracting, transforming, and loading batch data with stored procedures and SQL DDL/DML scripts.
+- **Data Quality & Cleansing**: Resolving dirty data, inconsistent text, trailing spaces, duplicate primary keys, and unifying formats (e.g., country ISO codes, customer demographics).
+- **Dimensional Modeling**: Applying Kimball methodologies to construct a Star Schema with Conformed Dimensions and Fact tables.
+- **Analytics & Reporting**: Writing advanced T-SQL queries (aggregations, window functions, CTEs) to extract business metrics for sales, product performance, and customer retention.
 
 ---
 
-## 🚀 Project Requirements
+## Technologies & Tools
 
-### Building the Data Warehouse (Data Engineering)
-
-#### Objective
-Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
-
-#### Specifications
-- **Data Sources**: Import data from two source systems (ERP and CRM) provided as CSV files.
-- **Data Quality**: Cleanse and resolve data quality issues prior to analysis.
-- **Integration**: Combine both sources into a single, user-friendly data model designed for analytical queries.
-- **Scope**: Focus on the latest dataset only; historization of data is not required.
-- **Documentation**: Provide clear documentation of the data model to support both business stakeholders and analytics teams.
+- **Database Engine**: Microsoft SQL Server
+- **Query & Server Management**: SQL Server Management Studio (SSMS)
+- **Version Control**: Git & GitHub
+- **Diagramming & Architecture**: Draw.io
 
 ---
 
-### BI: Analytics & Reporting (Data Analysis)
+## Project Requirements & Implementation Scope
 
-#### Objective
-Develop SQL-based analytics to deliver detailed insights into:
-- **Customer Behavior**
-- **Product Performance**
-- **Sales Trends**
+### 1. Data Engineering (Data Warehouse Build)
+- **Data Ingestion**: Ingest raw datasets from two distinct business operational systems (CRM & ERP).
+- **Data Cleansing**: Handle structural inconsistencies, deduplication via ranking window functions, and type casting.
+- **Integration**: Merge customer and product entities across both sources into unified surrogate-keyed dimensions.
+- **Auditability**: Add load timestamp tracking (`dwh_create_date`) across Silver and Gold entities.
 
-These insights empower stakeholders with key business metrics, enabling strategic decision-making.  
+### 2. Business Intelligence & Analytics
+- **Customer Analysis**: Profiling customer segments, lifetime purchasing patterns, and geographical distributions.
+- **Product Performance**: Tracking sales revenue, costs, margin contributions, and product categorization metrics.
+- **Sales Trends**: Evaluating period-over-period performance and key sales performance indicators (KPIs).
 
-For more details, refer to [docs/requirements.md](docs/requirements.md).
+---
 
-## 📂 Repository Structure
+## Repository Structure
+
+```text
+sql-data-warehouse-project/
+│
+├── datasets/                           # Raw datasets from source systems (ERP and CRM CSVs)
+│
+├── docs/                               # Technical specifications, architecture, and schema diagrams
+│   ├── etl.drawio                      # Visual representation of the ETL pipeline
+│   ├── data_architecture.drawio        # Medallion architecture diagram
+│   ├── data_catalog.md                 # Data dictionary and metadata catalog
+│   ├── data_flow.drawio                # End-to-end data lineage diagram
+│   ├── data_models.drawio              # Dimensional model (Star Schema design)
+│   └── naming-conventions.md           # Engineering guidelines for naming objects
+│
+├── scripts/                            # Production SQL scripts
+│   ├── bronze/                         # Ingestion scripts (Bulk load / DDL)
+│   ├── silver/                         # Cleansing, transformation, and audit enrichment scripts
+│   └── gold/                           # Star schema creation (Dimension & Fact views)
+│
+├── tests/                              # Data validation queries and unit integrity tests
+│
+├── README.md                           # Project documentation
+├── LICENSE                             # MIT License
+└── .gitignore                          # Standard git ignore file
 ```
-data-warehouse-project/
-│
-├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
-│
-├── docs/                               # Project documentation and architecture details
-│   ├── etl.drawio                      # Draw.io file shows all different techniquies and methods of ETL
-│   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
-│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
-│   ├── data_flow.drawio                # Draw.io file for the data flow diagram
-│   ├── data_models.drawio              # Draw.io file for data models (star schema)
-│   ├── naming-conventions.md           # Consistent naming guidelines for tables, columns, and files
-│
-├── scripts/                            # SQL scripts for ETL and transformations
-│   ├── bronze/                         # Scripts for extracting and loading raw data
-│   ├── silver/                         # Scripts for cleaning and transforming data
-│   ├── gold/                           # Scripts for creating analytical models
-│
-├── tests/                              # Test scripts and quality files
-│
-├── README.md                           # Project overview and instructions
-├── LICENSE                             # License information for the repository
-├── .gitignore                          # Files and directories to be ignored by Git
-└── requirements.txt                    # Dependencies and requirements for the project
-```
----
+## Author
 
+**Mohamed Osama**  
+*Data Analyst & BI Developer*
 
-## 🛡️ License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and share this project with proper attribution.
-
-## 🌟 About Me
-
-Hi there! I'm **Baraa Khatib Salkini**, also known as **Data With Baraa**. I’m an IT professional and passionate YouTuber on a mission to share knowledge and make working with data enjoyable and engaging!
-
-Let's stay in touch! Feel free to connect with me on the following platforms:
-
-[![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](http://bit.ly/3GiCVUE)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/baraa-khatib-salkini)
-[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.datawithbaraa.com)
-[![Newsletter](https://img.shields.io/badge/Newsletter-FF5722?style=for-the-badge&logo=substack&logoColor=white)](https://bit.ly/BaraaNewsletter)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/baraasalkini)
-[![Join](https://img.shields.io/badge/Join-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@datawithbaraa)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mohamed%20Osama-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-osama10/)
+[![Portfolio](https://img.shields.io/badge/Vercel-Data%20Analyst%20%26%20BI%20Developer-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mo-osama.vercel.app/)
